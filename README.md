@@ -2,6 +2,21 @@
 
 ![](https://i.goopics.net/nI.png)
 
+
+##### docker image: `registry.gitlab.com/youtous/rainloop`
+
+### Docker-compose.yml
+
+```yml
+rainloop:
+  image: registry.gitlab.com/youtous/rainloop
+  container_name: rainloop
+  volumes:
+    - /mnt/docker/rainloop:/rainloop/data
+  depends_on:
+    - mailserver
+```
+
 ### What is this ?
 
 Rainloop is a simple, modern & fast web-based client. 
@@ -33,18 +48,6 @@ This fork  https://github.com/hardware/rainloop maintains a docker image for the
 | **LOG_TO_STDOUT** | Enable nginx and php error logs to stdout | *optional* | true
 | **MEMORY_LIMIT** | PHP memory limit | *optional* | 128M
 | **SECURE_COOKIES** | PHP Cookies Secure Only (HTTPS required) | *optional* | true
-
-### Docker-compose.yml
-
-```yml
-rainloop:
-  image: registry.gitlab.com/youtous/rainloop
-  container_name: rainloop
-  volumes:
-    - /mnt/docker/rainloop:/rainloop/data
-  depends_on:
-    - mailserver
-```
 
 #### How to setup
 
