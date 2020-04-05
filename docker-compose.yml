@@ -10,6 +10,6 @@ services:
     ports:
       - "8000:8888"
     environment:
-      - UPLOAD_MAX_SIZE=200
+      - UPLOAD_MAX_SIZE=200M
     volumes:
       - ./rainloop-data:/rainloop/data
