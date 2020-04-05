@@ -1,38 +1,54 @@
-FROM alpine:3.10
+FROM php:7.3-fpm-stretch
 
 LABEL description "Rainloop is a simple, modern & fast web-based client" \
-      maintainer="Hardware <contact@meshup.net>"
+      maintainer="youtous <contact@youtous.me>"
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
-ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M LOG_TO_STDOUT=false MEMORY_LIMIT=128M
+ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M LOG_TO_STDOUT=true MEMORY_LIMIT=128M SECURE_COOKIES=true
 
-RUN echo "@community https://nl.alpinelinux.org/alpine/v3.10/community" >> /etc/apk/repositories \
- && apk -U upgrade \
- && apk add -t build-dependencies \
+# allow fpm to retrieve our .env
+ENV fpm.pool.clear_env=false
+
+# Install dependancies
+RUN	apt-get update && \
+    #fix https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+    mkdir -p /usr/share/man/man1/ /usr/share/man/man3/ /usr/share/man/man7/ && \
+    apt-get install --no-install-recommends --no-install-suggests -y \
+    apt-transport-https \
     gnupg \
     openssl \
     wget \
- && apk add \
+    curl \
     ca-certificates \
     nginx \
-    s6 \
-    su-exec \
-    php7-fpm@community \
-    php7-curl@community \
-    php7-iconv@community \
-    php7-xml@community \
-    php7-dom@community \
-    php7-openssl@community \
-    php7-json@community \
-    php7-zlib@community \
-    php7-pdo_pgsql@community \
-    php7-pdo_mysql@community \
-    php7-pdo_sqlite@community \
-    php7-sqlite3@community \
-    php7-ldap@community \
-    php7-simplexml@community \
- && cd /tmp \
+    supervisor \
+    sudo \
+    unzip \
+    libzip-dev \
+	# dependencies of XML
+    libxml2-dev \
+    libldb-dev \
+    # ldap
+    libldap2-dev \
+    # db clients
+    sqlite3 \
+    libsqlite3-dev \
+    libsqlite3-0 \
+    libpq-dev \
+    postgresql-client \
+    mariadb-client
+
+# Install missing php extensions
+RUN php -m && \
+    docker-php-ext-install pdo_pgsql && \
+    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    docker-php-ext-install ldap && \
+    php -m
+
+ # Install rainloop
+RUN cd /tmp \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip \
  && wget -q https://www.rainloop.net/repository/webmail/rainloop-community-latest.zip.asc \
  && wget -q https://www.rainloop.net/repository/RainLoop.asc \
@@ -44,11 +60,10 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.10/community" >> /etc/
  && mkdir /rainloop && unzip -q /tmp/rainloop-community-latest.zip -d /rainloop \
  && find /rainloop -type d -exec chmod 755 {} \; \
  && find /rainloop -type f -exec chmod 644 {} \; \
- && apk del build-dependencies \
  && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
 
 COPY rootfs /
-RUN chmod +x /usr/local/bin/run.sh /services/*/run /services/.s6-svscan/*
+RUN chmod +x /entrypoint.sh
 VOLUME /rainloop/data
 EXPOSE 8888
-CMD ["run.sh"]
+CMD ["/entrypoint.sh"]

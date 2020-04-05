@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+
+  rainloop:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: rainloop
+    ports:
+      - "8000:8888"
+    environment:
+      - UPLOAD_MAX_SIZE=200
+    volumes:
+      - ./rainloop-data:/rainloop/data
