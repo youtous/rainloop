@@ -49,3 +49,5 @@ rainloop:
 #### How to setup
 
 https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
+
+**/!\\ Important:** Please disable admin interface after configuration is done. 
