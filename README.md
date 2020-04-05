@@ -4,6 +4,8 @@
 
 
 ##### docker image: `registry.gitlab.com/youtous/rainloop`
+**version :** `1.14.0` _(open an issue if outdated https://github.com/RainLoop/rainloop-webmail/releases)_ 
+
 
 ### Docker-compose.yml
 
@@ -11,6 +13,8 @@
 rainloop:
   image: registry.gitlab.com/youtous/rainloop
   container_name: rainloop
+  ports:
+    - "80:8888"
   volumes:
     - /mnt/docker/rainloop:/rainloop/data
   depends_on:
