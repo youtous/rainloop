@@ -37,5 +37,9 @@ adduser --uid "$UID" --disabled-password --gid "$GID" --shell /bin/bash --home /
 # Fix permissions
 chown -R $UID:$GID /rainloop/data /var/log /var/lib/nginx
 
+# touch supervisord PID file in order to fix permissions
+touch /run/supervisord.pid
+chown php-cli:php-cli /run/supervisord.pid
+
 # RUN !
-exec sudo -u php-cli -g php-cli /usr/bin/supervisord -c '/supervisor.conf'
+exec sudo -u php-cli -g php-cli /usr/bin/supervisord -c '/supervisor.conf' --pidfile '/run/supervisord.pid'
