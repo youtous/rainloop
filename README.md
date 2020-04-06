@@ -3,6 +3,10 @@
 ![](https://i.goopics.net/nI.png)
 
 
+
+[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master)
+
+
 ##### docker image: `registry.gitlab.com/youtous/rainloop`
 **version :** `1.14.0` _(open an issue if outdated https://github.com/RainLoop/rainloop-webmail/releases)_ 
 
