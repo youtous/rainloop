@@ -9,6 +9,7 @@
 [![](https://images.microbadger.com/badges/version/youtous/rainloop.svg)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
 [![](https://badgen.net/docker/pulls/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
 
+- docker hub: https://hub.docker.com/r/youtous/rainloop
 - gitlab sources: https://gitlab.com/youtous/rainloop/
 - github mirror: https://github.com/youtous/rainloop
 
@@ -16,7 +17,7 @@
 
 ```yml
 rainloop:
-  image: registry.gitlab.com/youtous/rainloop
+  image: youtous/rainloop:latest
   container_name: rainloop
   ports:
     - "80:8888"
