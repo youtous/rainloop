@@ -5,14 +5,12 @@ services:
 
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY # gitlab
-  - docker login -u "$CI_DOCKERHUB_REGISTRY_USER" -p "$CI_DOCKERHUB_REGISTRY_PASSWORD" $CI_DOCKERHUB_REGISTRY # dockerhub
 
 build-master:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" -t "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE" # push on gitlab
-    - docker push "$CI_DOCKERHUB_REGISTRY_IMAGE" # push on dockerhub
   only:
     - master
 
@@ -21,7 +19,6 @@ build:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" -t "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" # push on gitlab
-    - docker push "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" # push on dockerhub
   except:
     - master
 
@@ -32,10 +29,6 @@ release:
     - docker pull $CI_REGISTRY_IMAGE
     - docker tag $CI_REGISTRY_IMAGE $CI_COMMIT_TAG
     - docker push $CI_REGISTRY_IMAGE
-    # dockerhub
-    - docker pull $CI_DOCKERHUB_REGISTRY_IMAGE
-    - docker tag $CI_DOCKERHUB_REGISTRY_IMAGE $CI_COMMIT_TAG
-    - docker push $CI_DOCKERHUB_REGISTRY_IMAGE
   only:
     - tags
   except:

@@ -8,7 +8,6 @@
 [![](https://badgen.net/docker/stars/youtous/rainloop?icon=docker&label=stars)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
 [![](https://images.microbadger.com/badges/version/youtous/rainloop.svg)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
 [![](https://badgen.net/docker/pulls/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
-[![Open Source Love png1](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 - gitlab sources: https://gitlab.com/youtous/rainloop/
 - github mirror: https://github.com/youtous/rainloop
