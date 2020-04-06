@@ -26,7 +26,7 @@ build:
     - master
 
 release:
-  stage: build
+  stage: release
   script:
     # gitlab
     - docker pull $CI_REGISTRY_IMAGE
