@@ -10,8 +10,7 @@
 [![](https://badgen.net/docker/pulls/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
 
 - docker hub: https://hub.docker.com/r/youtous/rainloop
-- gitlab sources: https://gitlab.com/youtous/rainloop/
-- github mirror: https://github.com/youtous/rainloop
+- github repo: https://github.com/youtous/rainloop
 
 ### Docker-compose.yml
 
