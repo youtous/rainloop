@@ -10,7 +10,7 @@ before_script:
 build-master:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" -t "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE" # push on gitlab
     - docker push "$CI_DOCKERHUB_REGISTRY_IMAGE" # push on dockerhub
   only:
@@ -19,7 +19,7 @@ build-master:
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" -t "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" # push on gitlab
     - docker push "$CI_DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" # push on dockerhub
   except:
