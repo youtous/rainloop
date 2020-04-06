@@ -3,9 +3,14 @@
 ![](https://i.goopics.net/nI.png)
 
 
-##### docker image: `registry.gitlab.com/youtous/rainloop`
-**version :** `1.14.0` _(open an issue if outdated https://github.com/RainLoop/rainloop-webmail/releases)_ 
 
+[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master)
+[![](https://badgen.net/docker/stars/youtous/rainloop?icon=docker&label=stars)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
+[![](https://images.microbadger.com/badges/version/youtous/rainloop.svg)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
+[![](https://badgen.net/docker/pulls/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
+
+- gitlab sources: https://gitlab.com/youtous/rainloop/
+- github mirror: https://github.com/youtous/rainloop
 
 ### Docker-compose.yml
 
