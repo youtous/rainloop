@@ -1,5 +1,10 @@
 image: docker:latest
 
+stages:
+  - build
+  - test
+  - release
+
 services:
   - docker:dind
 
@@ -22,10 +27,11 @@ build:
   except:
     - master
 
-release-image:
+release:
+  stage: release
   only:
     - tags
-  stage: release
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+    - docker pull "$CI_REGISTRY_IMAGE"
+    - docker tag $CI_REGISTRY_IMAGE $CI_COMMIT_TAG
+    - docker push $CI_REGISTRY_IMAGE
