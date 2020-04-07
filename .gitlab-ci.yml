@@ -29,8 +29,11 @@ build:
 
 release:
   stage: release
+  # only start a release on tags of master (not other branches)
   only:
     - tags
+  except:
+    - branches
   script:
     - docker pull "$CI_REGISTRY_IMAGE"
     - docker tag $CI_REGISTRY_IMAGE $CI_COMMIT_TAG
