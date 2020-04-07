@@ -3,38 +3,50 @@ image: docker:latest
 stages:
   - build
   - test
-  - release
+  - push
 
 services:
   - docker:dind
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY # gitlab
+  # docker login asks for the password to be passed through stdin for security
+  # we use $CI_JOB_TOKEN here which is a special token provided by GitLab
+  - echo -n $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
 
-build-master:
-  stage: build
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .
-    - docker push "$CI_REGISTRY_IMAGE:latest" # push on gitlab
-  only:
-    - master
-
+# build the image and push it on gitlab registry
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" # push on gitlab
-  except:
-    - master
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  only:
+    - master # comment if you wanna CI any of the branches
 
-release:
-  stage: release
+# push "latest" image to the registry
+release-latest:
+  variables:
+    GIT_STRATEGY: none # don't pull sourcecode
+  stage: push
+  only:
+    - master # latest from master only
+  script:
+    # pull image from registry, tag it then push
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+# push "tagged" image to the registry
+release-tag:
+  variables:
+    GIT_STRATEGY: none # don't pull sourcecode
+  stage: push
   # only start a release on tags of master (not other branches)
   only:
-    - tags
+    - tags # latest from master only
   except:
     - branches
   script:
-    - docker pull "$CI_REGISTRY_IMAGE"
-    - docker tag $CI_REGISTRY_IMAGE $CI_COMMIT_TAG
-    - docker push $CI_REGISTRY_IMAGE
+    # pull image from registry, tag it then push
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
