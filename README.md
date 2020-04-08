@@ -64,4 +64,28 @@ This fork  https://github.com/hardware/rainloop maintains a docker image for the
 
 https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
 
-**/!\\ Important:** Please disable admin interface after configuration is done. It's possible to restrict 
+**/!\\ Security:** Restrict admin interface after configuration is done.
+
+#### Fail2ban pattern
+
+Authentication failures are logged using the following pattern:
+```
+[{date:Y-m-d H:i:s}] Auth failed: ip={request:ip} user={imap:login} host={imap:host} port={imap:port}
+```
+
+You can configure fail2ban jails and filter as it follows:
+
+_/etc/fail2ban/filter.d/rainloop.conf_
+```
+[Definition]
+failregex = Auth failed: ip=<HOST> user=.* host=.* port=.*$
+ignoreregex =
+```
+
+_/etc/fail2ban/jail.local_
+```
+[rainloop]
+enabled = true
+port = http,https
+backend = systemd # systemd is used as a source of logs, docker logs are redirected to systemd
+```
