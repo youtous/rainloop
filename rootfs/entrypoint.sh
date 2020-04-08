@@ -9,12 +9,12 @@ if [ -d "/rainloop/data/_data_/_default_/plugins/postfixadmin-change-password" ]
   rm -rf /rainloop/data/_data_/_default_/plugins/postfixadmin-change-password
 fi
 
-# Set log output to STDOUT if wanted (LOG_TO_STDOUT=true)
+# Set log output to STDERR if wanted (LOG_TO_STDERR=true)
 if [ "$LOG_TO_STDOUT" = true ]; then
-  echo "[INFO] Logging to stdout activated"
+  echo "[INFO] Logging to stderr activated"
   chmod o+w /dev/stdout
-  sed -i "s/.*error_log.*$/error_log \/dev\/stdout warn;/" /etc/nginx/nginx.conf
-  sed -i "s/.*error_log.*$/error_log = \/dev\/stdout/" /usr/local/etc/php-fpm.d/php-fpm.conf
+  sed -i "s/.*error_log.*$/error_log \/dev\/stderr warn;/" /etc/nginx/nginx.conf
+  sed -i "s/.*error_log.*$/php_admin_value[error_log] = \/dev\/stderr/" /usr/local/etc/php-fpm.d/php-fpm.conf
 fi
 
 # Secure cookies
@@ -36,6 +36,12 @@ adduser --uid "$UID" --disabled-password --gid "$GID" --shell /bin/bash --home /
 
 # Fix permissions
 chown -R $UID:$GID /rainloop/data /var/log /var/lib/nginx
+
+# Redirect rainloop logs to stderr /stdout
+# todo : edit application to enable auth logging and eventually error logging
+touch /rainloop/data/_data_/_default_/logs/errors.log
+touch /rainloop/data/_data_/_default_/logs/auth.log
+chown -R php-cli:php-cli /rainloop/data/_data_/_default_/logs/
 
 # touch supervisord PID file in order to fix permissions
 touch /run/supervisord.pid

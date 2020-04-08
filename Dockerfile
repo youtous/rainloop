@@ -37,7 +37,9 @@ RUN	apt-get update && \
     libsqlite3-0 \
     libpq-dev \
     postgresql-client \
-    mariadb-client
+    mariadb-client \
+    # Install logrotate for Rainloop log files
+    logrotate
 
 # Install missing php extensions
 RUN php -m && \
@@ -64,6 +66,7 @@ RUN cd /tmp \
 
 COPY rootfs /
 RUN chmod +x /entrypoint.sh
+RUN chmod +x /logrotate-loop.sh
 VOLUME /rainloop/data
 EXPOSE 8888
 CMD ["/entrypoint.sh"]

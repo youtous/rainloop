@@ -40,7 +40,9 @@ This fork  https://github.com/hardware/rainloop maintains a docker image for the
 - Latest Rainloop **Community Edition** (stable)
 - Contacts (DB) : sqlite, mysql or pgsql (server not built-in)
 - With Nginx and PHP7
-- Postfixadmin-change-password plugin # todo
+- Postfixadmin-change-password plugin
+- Redirects Rainloop log files to docker logs, allowing fail2ban processing
+- Periodically rotates rainloop log files (errors, auth)
 
 ### Build-time variables
 - **GPG_FINGERPRINT** : fingerprint of signing key
@@ -54,7 +56,7 @@ This fork  https://github.com/hardware/rainloop maintains a docker image for the
 | **UID** | rainloop user id | *optional* | 991
 | **GID** | rainloop group id | *optional* | 991
 | **UPLOAD_MAX_SIZE** | Attachment size limit | *optional* | 25M
-| **LOG_TO_STDOUT** | Enable nginx and php error logs to stdout | *optional* | true
+| **LOG_TO_STDERR** | Enable nginx and php error logs to stderr | *optional* | true
 | **MEMORY_LIMIT** | PHP memory limit | *optional* | 128M
 | **SECURE_COOKIES** | PHP Cookies Secure Only (HTTPS required) | *optional* | true
 
@@ -62,4 +64,4 @@ This fork  https://github.com/hardware/rainloop maintains a docker image for the
 
 https://github.com/hardware/mailserver/wiki/Rainloop-initial-configuration
 
-**/!\\ Important:** Please disable admin interface after configuration is done. 
+**/!\\ Important:** Please disable admin interface after configuration is done. It's possible to restrict 
