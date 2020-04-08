@@ -12,7 +12,7 @@ CONF="/etc/logrotate.d/rainloop"
 
 export LOGROTATE_BIN STATE CONF
 
-RUN_INTERVAL="20"     # every hour
+RUN_INTERVAL="3600"     # every hour
 
 # helper functions for logging
 export FMT="%a %b %d %Y %H:%M:%S GMT%z (%Z)"
