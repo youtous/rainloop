@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Create not root user
+groupadd --gid "$GID" php-cli -f
+adduser --uid "$UID" --disabled-password --gid "$GID" --shell /bin/bash --home /home/php-cli php-cli --force --gecos ""
+
+
 # Set attachment size limit
 sed -i "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /usr/local/etc/php-fpm.d/php-fpm.conf /etc/nginx/nginx.conf
 sed -i "s/<MEMORY_LIMIT>/$MEMORY_LIMIT/g" /usr/local/etc/php-fpm.d/php-fpm.conf
@@ -42,7 +47,8 @@ fi
 if [ "${LOG_TO_STDERR}" = true ]; then
   sed -z 's/\; Enable logging\nenable = Off/\; Enable logging\nenable = On/' -i $RAINLOOP_CONFIG_FILE
   sed 's/^filename = .*/filename = "errors.log"/' -i $RAINLOOP_CONFIG_FILE
-  sed 's/^write_on_error_only = .*/write_on_error_only = On/' -i $RAINLOOP_CONFIG_FILE
+  sed 's/^write_on_error_only = .*/write_on_error_only = Off/' -i $RAINLOOP_CONFIG_FILE
+  sed 's/^write_on_php_error_only = .*/write_on_php_error_only = On/' -i $RAINLOOP_CONFIG_FILE
 else
     sed -z 's/\; Enable logging\nenable = On/\; Enable logging\nenable = Off/' -i $RAINLOOP_CONFIG_FILE
 fi
@@ -52,13 +58,10 @@ sed 's/^auth_logging_filename = .*/auth_logging_filename = "auth.log"/' -i $RAIN
 sed 's/^auth_logging_format = .*/auth_logging_format = "[{date:Y-m-d H:i:s}] Auth failed: ip={request:ip} user={imap:login} host={imap:host} port={imap:port}"/' -i $RAINLOOP_CONFIG_FILE
 # Redirect rainloop logs to stderr /stdout
 mkdir -p /rainloop/data/_data_/_default_/logs/
-touch /rainloop/data/_data_/_default_/logs/errors.log
-touch /rainloop/data/_data_/_default_/logs/auth.log
+# empty logs
+cp /dev/null /rainloop/data/_data_/_default_/logs/errors.log
+cp /dev/null /rainloop/data/_data_/_default_/logs/auth.log
 chown -R php-cli:php-cli /rainloop/data/
-
-# Create not root user
-groupadd --gid "$GID" php-cli -f
-adduser --uid "$UID" --disabled-password --gid "$GID" --shell /bin/bash --home /home/php-cli php-cli --force
 
 # Fix permissions
 chown -R $UID:$GID /rainloop/data /var/log /var/lib/nginx
