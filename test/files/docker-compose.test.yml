@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+
+  rainloop:
+    image: youtous/rainloop:test-image
+    ports:
+      - "8001:8888"
+    environment:
+      - UPLOAD_MAX_SIZE=200M
+    volumes:
+      - rainloop-data:/rainloop/data
+
+volumes:
+  rainloop-data:
+    driver: local

@@ -3,17 +3,17 @@
 .DEFAULT_GOAL= help
 
 build: ## Build the image
-	docker build . -t 'rainloop'
+	docker build . -t 'youtous/rainloop'
 
 build-test: ## Build the test image
-	docker build . -t 'rainloop:test-image'
+	docker build . -t 'youtous/rainloop:test-image'
 
 tests: build-test ## Run all the tests.
 	./test/libs/bats/bin/bats test/*.bats
 	make clean
 
 clean: ## Remove docker images built.
-	docker rmi mailserver-traefik:test-image
+	docker rmi youtous/rainloop:test-image
 
 # see https://suva.sh/posts/well-documented-makefiles/
 help: ## Show this help prompt.
