@@ -1,7 +1,13 @@
 FROM php:7.3-fpm-stretch
 
-LABEL description "Rainloop is a simple, modern & fast web-based client" \
-      maintainer="youtous <contact@youtous.me>"
+LABEL org.label-schema.description="Rainloop (webmail client) image using nginx, php-fpm based on debian." \
+ maintainer="youtous <contact@youtous.me>" \
+ org.label-schema.build-date=$BUILD_DATE \
+ org.label-schema.name="youtous/rainloop" \
+ org.label-schema.url="https://github.com/youtous/rainloop" \
+ org.label-schema.vcs-url="https://github.com/youtous/rainloop" \
+ org.label-schema.vcs-ref=$VCS_REF \
+ org.label-schema.version=$VCS_VERSION
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
