@@ -18,8 +18,8 @@ build:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
-    # - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-  # only: [] # restrict building to some branches
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  only: [] # restrict building to some branches
 
 test:
   image: tmaier/docker-compose:latest
