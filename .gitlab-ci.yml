@@ -61,5 +61,6 @@ build-release:
   except:
     - branches
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" .
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_TAGGED_IMAGE
     - docker push $CONTAINER_RELEASE_TAGGED_IMAGE
