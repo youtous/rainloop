@@ -45,7 +45,8 @@ RUN	apt-get update && \
     postgresql-client \
     mariadb-client \
     # Install logrotate for Rainloop log files
-    logrotate
+    logrotate \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install missing php extensions
 RUN php -m && \
@@ -68,7 +69,7 @@ RUN cd /tmp \
  && mkdir /rainloop && unzip -q /tmp/rainloop-community-latest.zip -d /rainloop \
  && find /rainloop -type d -exec chmod 755 {} \; \
  && find /rainloop -type f -exec chmod 644 {} \; \
- && rm -rf /tmp/* /var/cache/apk/* /root/.gnupg
+ && rm -rf /tmp/* /root/.gnupg
 
 COPY rootfs /
 RUN chmod +x /entrypoint.sh
