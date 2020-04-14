@@ -2,12 +2,10 @@
 
 ![](https://i.goopics.net/nI.png)
 
-
-
-[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master)
-[![](https://badgen.net/docker/stars/youtous/rainloop?icon=docker&label=stars)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
-[![](https://images.microbadger.com/badges/version/youtous/rainloop.svg)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
-[![](https://badgen.net/docker/pulls/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop "See this project on docker hub registry")
+[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master) 
+[![Docker image size](https://img.shields.io/docker/image-size/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop/) 
+[![Docker hub](https://img.shields.io/badge/hub-youtous%2Frainloop-099cec?logo=docker)](https://hub.docker.com/r/youtous/rainloop/) 
+[![Licence](https://img.shields.io/github/license/youtous/rainloop)](https://github.com/youtous/rainloop/blob/master/LICENSE) 
 
 - docker hub: https://hub.docker.com/r/youtous/rainloop
 - github repo: https://github.com/youtous/rainloop
@@ -32,7 +30,7 @@ Rainloop is a simple, modern & fast web-based client.
 More details on the [official website](http://www.rainloop.net/).
 
 This fork  https://github.com/hardware/rainloop maintains a docker image for the latest version of rainloop using **debian stretch** image as base.
-
+It also provides some security enhancements, see below.
 
 ### Features
 - Lightweight & secure image (no root process)

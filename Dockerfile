@@ -20,7 +20,9 @@ ENV fpm.pool.clear_env=false
 RUN	apt-get update && \
     #fix https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
     mkdir -p /usr/share/man/man1/ /usr/share/man/man3/ /usr/share/man/man7/ && \
-    apt-get install --no-install-recommends --no-install-suggests -y \
+    apt-get update -q --fix-missing && \
+    apt-get -y upgrade && \
+    apt-get install --no-install-recommends -y \
     apt-transport-https \
     gnupg \
     openssl \
