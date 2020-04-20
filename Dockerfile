@@ -17,9 +17,8 @@ ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M LOG_TO_STDERR=true MEMORY_LIMIT=128M SEC
 ENV fpm.pool.clear_env=false
 
 # Install dependancies
-RUN	apt-get update && \
-    #fix https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
-    mkdir -p /usr/share/man/man1/ /usr/share/man/man3/ /usr/share/man/man7/ && \
+#fix https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+RUN	mkdir -p /usr/share/man/man1/ /usr/share/man/man3/ /usr/share/man/man7/ && \
     apt-get update -q --fix-missing && \
     apt-get -y upgrade && \
     apt-get install --no-install-recommends -y \
