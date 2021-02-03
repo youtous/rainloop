@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-stretch
+FROM php:8.0-fpm
 
 LABEL org.label-schema.description="Rainloop (webmail client) image using nginx, php-fpm based on debian." \
  maintainer="youtous <contact@youtous.me>" \

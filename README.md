@@ -34,10 +34,10 @@ It also provides some security enhancements, see below.
 
 ### Features
 - Lightweight & secure image (no root process)
-- Based on **Debian-stretch**
+- Based on **Debian-buster**
 - Latest Rainloop **Community Edition** (stable)
 - Contacts (DB) : sqlite, mysql or pgsql (server not built-in)
-- With Nginx and PHP7
+- With Nginx and PHP8
 - Postfixadmin-change-password plugin
 - Redirects Rainloop log files to docker logs, allowing fail2ban processing
 - Periodically rotates rainloop log files (errors, auth)
