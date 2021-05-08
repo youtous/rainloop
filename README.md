@@ -32,6 +32,8 @@ More details on the [official website](http://www.rainloop.net/).
 This fork  https://github.com/hardware/rainloop maintains a docker image for the latest version of rainloop using **debian stretch** image as base.
 It also provides some security enhancements, see below.
 
+*Rainloop version:* 1.16.0
+
 ### Features
 - Lightweight & secure image (no root process)
 - Based on **Debian-buster**
