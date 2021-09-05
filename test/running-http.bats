@@ -16,12 +16,12 @@ function teardown() {
 }
 
 @test "check: http status 200 after 20s" {
-  run repeat_until_success_or_timeout "$TEST_TIMEOUT_IN_SECONDS" sh -c "curl http://localhost:8001 -i | grep -F 'HTTP/1.1 200 OK'"
+  run repeat_until_success_or_timeout "$TEST_TIMEOUT_IN_SECONDS" sh -c "curl http://$TEST_LOCALHOST_HOSTNAME:8001 -i | grep -F 'HTTP/1.1 200 OK'"
   assert_success
 
   sleep 20
 
-  run repeat_until_success_or_timeout "$TEST_TIMEOUT_IN_SECONDS" sh -c "curl http://localhost:8001 -i | grep -F 'HTTP/1.1 200 OK'"
+  run repeat_until_success_or_timeout "$TEST_TIMEOUT_IN_SECONDS" sh -c "curl http://$TEST_LOCALHOST_HOSTNAME:8001 -i | grep -F 'HTTP/1.1 200 OK'"
   assert_success
 }
 
