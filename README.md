@@ -2,19 +2,19 @@
 
 ![](https://i.goopics.net/nI.png)
 
-[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master) 
-[![Docker image size](https://img.shields.io/docker/image-size/youtous/rainloop)](https://hub.docker.com/r/youtous/rainloop/) 
-[![Docker hub](https://img.shields.io/badge/hub-youtous%2Frainloop-099cec?logo=docker)](https://hub.docker.com/r/youtous/rainloop/) 
+[![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master)
+[![Docker image](https://img.shields.io/badge/image-registry.gitlab.com%2Fyoutous%2Frainloop-e4f0fb?logo=docker)](https://gitlab.com/youtous/caddy-consul-docker/container_registry/1687721)
 [![Licence](https://img.shields.io/github/license/youtous/rainloop)](https://github.com/youtous/rainloop/blob/master/LICENSE) 
 
-- docker hub: https://hub.docker.com/r/youtous/rainloop
+- docker images: https://gitlab.com/youtous/rainloop/container_registry/1017255
 - github repo: https://github.com/youtous/rainloop
+- gitlab repo: https://gitlab.com/youtous/rainloop
 
 ### Docker-compose.yml
 
 ```yml
 rainloop:
-  image: youtous/rainloop:latest
+  image: registry.gitlab.com/youtous/rainloop:latest
   container_name: rainloop
   ports:
     - "80:8888"
