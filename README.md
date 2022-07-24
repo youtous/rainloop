@@ -3,12 +3,11 @@
 ![](https://i.goopics.net/nI.png)
 
 [![pipeline status](https://gitlab.com/youtous/rainloop/badges/master/pipeline.svg)](https://gitlab.com/youtous/rainloop/-/commits/master)
-[![Docker image](https://img.shields.io/badge/image-registry.gitlab.com%2Fyoutous%2Frainloop-e4f0fb?logo=docker)](https://gitlab.com/youtous/caddy-consul-docker/container_registry/1687721)
+[![Docker image](https://img.shields.io/badge/image-registry.gitlab.com%2Fyoutous%2Frainloop-e4f0fb?logo=docker)](https://gitlab.com/youtous/rainloop/container_registry/1687721)
+[![GitHub Repo stars](https://img.shields.io/github/stars/youtous/rainloop?label=✨%20youtous%2Frainloop&style=social)](https://github.com/youtous/rainloop/)
+[![Gitlab Repo](https://img.shields.io/badge/gitlab.com%2Fyoutous%2Fcaddy--consul--docker?label=✨%20youtous%2Frainloop&style=social&logo=gitlab)](https://gitlab.com/youtous/rainloop/)
 [![Licence](https://img.shields.io/github/license/youtous/rainloop)](https://github.com/youtous/rainloop/blob/master/LICENSE) 
 
-- docker images: https://gitlab.com/youtous/rainloop/container_registry/1017255
-- github repo: https://github.com/youtous/rainloop
-- gitlab repo: https://gitlab.com/youtous/rainloop
 
 ### Docker-compose.yml
 
